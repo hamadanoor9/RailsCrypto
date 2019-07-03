@@ -1,0 +1,46 @@
+
+
+<h1>My Cryptos</h1>
+<br/>
+<table class = "table table-striped table-bordered table-hover">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Current Price</th>
+      <th>24 hr %</th>
+      <th>Total Value</th>
+      <th>Total Paid</th>
+      <th>Profit/Loss</th>
+      <th>Cost Paid Per</th>
+      <th>Amount owned</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @cryptos.each do |crypto| %>
+      <% if crypto.user_id == current_user.id %>
+        <tr>
+          <% for coin in @lookup_crypto %>
+            <% if coin["symbol"].downcase == crypto.symbol.downcase %>
+              <td><%= link_to  coin["name"] , crypto %></td>
+              <td>$<%= coin["current_price"] %></td>
+              <td><%= coin["price_change_percentage_24h"]%></td>
+              <td>$<%= coin["current_price"].to_d * crypto.amount_owned %></td>
+              <td>$<%= (crypto.cost_per * crypto.amount_owned) %></td>
+              <td>$<%=  (coin["current_price"].to_d * crypto.amount_owned) - (crypto.cost_per * crypto.amount_owned) %></td>
+              <td>$<%= crypto.cost_per %></td>
+              <td><%= crypto.amount_owned %></td>
+              <% @profit_loss += (coin["current_price"].to_d * crypto.amount_owned) - (crypto.cost_per * crypto.amount_owned) %>
+            <% end %>
+          <% end %>
+          
+        </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+<p><strong>Total Loss Profit: </strong><%= number_to_currency(@profit_loss) %></p>
+
+<%= link_to 'New Crypto', new_crypto_path, class: "btn btn-default" %>

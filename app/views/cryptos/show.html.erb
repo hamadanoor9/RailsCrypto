@@ -1,0 +1,39 @@
+<% for coin in @show_crypto %>
+  <% if coin["symbol"].downcase == @crypto.symbol.downcase %>
+    <% crypto_name = coin["name"] %>
+    <% crypto_price = coin["current_price"] %>
+  <% end %>
+<% end %>
+
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title"><%= crypto_name %></h3>
+  </div>
+  <div class="panel-body">
+    <p>
+      <strong>Symbol:</strong>
+      <%= @crypto.symbol %>
+    </p>
+    
+    <p>
+      <strong>Current Price:</strong>
+      <%= crypto_price %>
+    </p>
+    
+    <p>
+      <strong>Cost per:</strong>
+      <%= @crypto.cost_per %>
+    </p>
+    
+    <p>
+      <strong>Amount owned:</strong>
+      <%= @crypto.amount_owned %>
+    </p>
+    
+  </div>
+  <div class="panel-footer"><%= link_to 'Edit', edit_crypto_path(@crypto) %> |
+    <%= link_to 'Back', cryptos_path %> | 
+    <%= link_to 'Delete Crypto Currency', crypto_path(@crypto), method: :delete, data: { confirm: 'Are you sure?' } %>
+  </div>
+</div>
