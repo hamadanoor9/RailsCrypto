@@ -16,8 +16,6 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav navbar-right">
         <li><%= link_to "Home", root_path %></li>
-        <li><%= link_to "About", home_about_path %></li>
-        <li> <%= link_to "Lookup", home_lookup_path %></li>
         <% if user_signed_in? %>
           <li> <%= link_to "Add New", new_crypto_path %></li>
           <li> <%= link_to "My Cryptos", cryptos_path %></li>

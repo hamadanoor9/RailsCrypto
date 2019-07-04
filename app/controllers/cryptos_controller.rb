@@ -40,8 +40,16 @@ class CryptosController < ApplicationController
     @response = Net::HTTP.get(@uri)
     @new_crypto = JSON.parse(@response)
     @crypto_symbols = []
+    user_cryptos = []
+    for y in current_user.cryptos
+      user_cryptos << y.symbol
+    end
     for x in @new_crypto
-      @crypto_symbols << x["symbol"]
+    
+        if !user_cryptos.include?( x["symbol"])
+          @crypto_symbols << x["symbol"]
+        end
+    
     end
   end
 
@@ -103,5 +111,10 @@ class CryptosController < ApplicationController
     def correct_user
       @correct = current_user.cryptos.find_by(id: params[:id])
       redirect_to cryptos_path, notice: "Not Authorized to edit this entry" if @correct.nil?
+    end
+    
+    def get_coins
+    
+    
     end
 end

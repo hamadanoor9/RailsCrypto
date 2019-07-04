@@ -18,7 +18,7 @@
       <% end %>
     
       <div class="field">
-        <%= form.label :symbol %>
+        <%= form.label :crypto %><br/>
         <%= form.select :symbol , @crypto_symbols, class: "form-control" %>
       </div>
     
@@ -29,12 +29,12 @@
     
       <div class="field">
         <%= form.label :cost_per %>
-        <%= form.text_field :cost_per, class: "form-control"  %>
+        <%= form.number_field :cost_per, class: "form-control", step: "any"  %>
       </div>
     
       <div class="field">
         <%= form.label :amount_owned %>
-        <%= form.text_field :amount_owned , class: "form-control" %>
+        <%= form.number_field :amount_owned , class: "form-control", step: "any" %>
       </div>
     
       <div class="actions">

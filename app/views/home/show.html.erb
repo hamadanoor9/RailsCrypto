@@ -1,0 +1,40 @@
+<%= render 'search'%>
+    
+<% if @currency != "No such currency" %>
+    <table class = "table table-striped table-bordered table-hover">
+        <thead>
+            <tr>
+              <th>Name</th>
+              <th>Symbol</th>
+              <th>Current Price</th>
+              <th>Highest in 24 hr</th>
+              <th>Lowest in 24 hr</th>
+              <th>24 hr change %</th>
+              
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr>
+                <td><%= @currency["name"] %></td>
+                <td><%= @currency["symbol"] %></td>
+                <td><%= @currency["current_price"] %></td>
+                <td><%= @currency["high_24h"] %></td>
+                <td><%= @currency["low_24h"] %></td>
+                <% if @currency["price_change_percentage_24h"].to_d < 0 %>
+                  <td style = "color:red"><%= @currency["price_change_percentage_24h"]%>%</td>
+                <% else %>
+                  <td style = "color:green"><%= @currency["price_change_percentage_24h"]%>%</td>
+                <% end %>
+            </tr>
+        </tbody>
+    </table>
+
+    
+<% else %>
+    <h1><%= @currency %></h1>
+<% end %>
+</div>
+<%= link_to 'Back', root_path %>
+
+
